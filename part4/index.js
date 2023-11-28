@@ -7,6 +7,7 @@ const { MONGODB_URI, PORT } = require('./utils/config')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
+const testingRouter = require('./controllers/testing')
 const { getTokenFrom, errorHandler, userExtractor } = require('./utils/middleware')
 
 
@@ -22,12 +23,14 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use(errorHandler)
 
+if (process.env.NODE_ENV === 'test') {
+    app.use('/api/testing', testingRouter)
 
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`)
-    })
 }
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
 
 
 module.exports = app
