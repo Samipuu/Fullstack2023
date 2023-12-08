@@ -12,10 +12,11 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhbWlwdXUiLCJpZCI6IjY1NGZiNjZlYjk3NzJjNTNjMjMzMmMxOCIsImlhdCI6MTcwMDM4NDQxMn0.1cFnoPamuMM2wMpblTw81mmVo80hLoDgN2pDnyp0DLY
 
 {
-    "title" : "Samin blogi",
+    "title" : "Latest blog",
     "author" : "Sami",
-    "url" : "www.sami.fi",
-    "likes" : "9999"
+    "url" : "http://www.google.fi",
+    "likes" : "9999999",
+    "comments" : ["Best blog ever", "Likes over 9000"]
 }
 
 ###
@@ -49,3 +50,9 @@ POST http://localhost:3003/api/login/
 Content-Type: application/json
 
 {"username": "Samipuu", "password" : "manteli"}
+
+###
+POST http://localhost:3003/api/blogs/6559df885dd45967aebbf8a1/comments/
+Content-Type: application/json
+
+{"comment": "Tämä on kommentti"}
