@@ -41,7 +41,10 @@ export interface BaseEntry {
   diagnosisCodes?: Array<Diagnosis['code']>;
 }
 
-export type EntryFormValues = Omit<Entry, 'id'>;
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown
+  ? Omit<T, K>
+  : never;
+export type EntryFormValues = UnionOmit<Entry, 'id'>;
 
 export interface HealthCheckEntry extends BaseEntry {
   type: 'HealthCheck';

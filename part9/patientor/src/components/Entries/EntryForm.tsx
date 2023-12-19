@@ -93,7 +93,8 @@ const EntryForm = ({ diagnoses, onCancel, onSubmit }: Props) => {
       }
     }
 
-    onSubmit(newEntry);
+    if (!newEntry) return;
+    onSubmit(newEntry as EntryFormValues);
 
     emptyForm();
   };
@@ -139,7 +140,13 @@ const EntryForm = ({ diagnoses, onCancel, onSubmit }: Props) => {
           fullWidth
           multiple
           value={diagnosisCodes}
-          onChange={({ target }) => setDiagnosisCodes(target.value)}
+          onChange={({ target }) => {
+            if (typeof target.value === 'string') {
+              setDiagnosisCodes([target.value]);
+            } else {
+              setDiagnosisCodes(target.value);
+            }
+          }}
         >
           {diagnoses.map((diagnosis) => (
             <MenuItem value={diagnosis.code}>{diagnosis.code}</MenuItem>
